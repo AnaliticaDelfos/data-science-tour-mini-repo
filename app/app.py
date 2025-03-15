@@ -28,7 +28,6 @@ def __filtrar_datos(datos: pd.DataFrame):
 def __transformar_datos(datos: pd.DataFrame):
     datos['hora_transaccion'] = datos['fecha_transaccion'].dt.hour
     datos['dia_transaccion'] = datos['fecha_transaccion'].dt.day
-    datos['segundo_transaccion'] = datos['fecha_transaccion'].dt.second
     datos['recurrente'] = datos['recurrente'].astype(int)
     datos = datos.drop('fecha_transaccion', axis=1)
     return datos
