@@ -7,7 +7,7 @@ CATEGORIAS_VISITADAS = "D|N|X"
 
 def __obtener_datos(coleccion: Collection, desde: datetime):
     todos = coleccion.aggregate([
-        {"$match": {"fecha_transaccion": {"$gt": desde}}}
+        {"$match": {"fecha_transaccion": {"$g": desde}}}
     ])
     todos = list(todos)
     todos = pd.DataFrame(todos, columns=["nombre",
