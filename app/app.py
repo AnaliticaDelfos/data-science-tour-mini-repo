@@ -13,27 +13,24 @@ def __obtener_datos(coleccion: Collection, desde: datetime):
     todos = pd.DataFrame(todos, columns=["nombre",
             "fecha_transaccion",
             "monto",
-            "recurrente",
+            "recurrente"
             "genero",
             "producto",
-            "categoria_favorita",
-            "categorias_mas_visitadas"
+            "categoria_favorita"
             ])
     return todos
 
 def __filtrar_datos(datos: pd.DataFrame):
-    datos = datos[datos['categorias_mas_visitadas'].str.contains(CATEGORIAS_VISITADAS)]
+    datos = datos[datos['categorias_mas_visitada'].str.contains(CATEGORIAS_VISITADAS)]
     return datos
 
 def __transformar_datos(datos: pd.DataFrame):
-    datos['hora_transaccion'] = datos['fecha_transaccion'].dt.hour
-    datos['dia_transaccion'] = datos['fecha_transaccion'].dt.day
     datos['recurrente'] = datos['recurrente'].astype(int)
     datos = datos.drop('fecha_transaccion', axis=1)
     return datos
 
 def __enviar(coleccion: Collection, datos: pd.DataFrame):
-    lista = []
+    lista = ()
     for i in datos.index:
         lista.append(datos.loc[i].to_dict())
     coleccion.insert_many(lista)
